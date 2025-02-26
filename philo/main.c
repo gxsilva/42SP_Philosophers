@@ -5,24 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:30:21 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/24 20:38:44 by lsilva-x         ###   ########.fr       */
+/*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
+/*   Updated: 2025/02/26 20:38:34 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //printf
-#include <string.h> //memset
-#include <stdlib.h> //malloc, free 
-#include <unistd.h> //write, usleep
-#include <sys/time.h> //gettimeofday
-#include <pthread.h> //pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy,pthread_mutex_lock, pthread_mutex_unlock
+#include "./utils.h"
+
+long int take_time(void)
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_usec);
+}
+
+float
 
 int main(int argc, char **argv)
 {
-	if (argc < 5)
-	{
-		printf("[Error]: Invalid numbers of arguments, minimum 4\n");
-		return (-1);
-	}
+	long		x;
+	long		y;
+
+	x = take_time();
+	for (volatile long i = 0; i < 1000000; i++);
+	y = take_time();
+	printf("Time pass: %ld\n", y - x);
 	return (0);
 }
+/*
+int main(int argc, char **argv)
+{
+	int		init_time;
+	int		end_time;
+	
+	printf("Init time: %d\n", init_time);
+	sleep(5);
+	gettimeofday(&tv, NULL); //atualizar os valores após sleep
+	end_time = tv.tv_sec;
+	printf("Final time: %d\n", end_time);
+	printf("Time: %d\n", (end_time - init_time));
+	printf("Seconds: %lu\n", tv.tv_sec);
+	printf("Miliseconds: %lu\n", tv.tv_usec);
+	return (0);
+}
+*/
