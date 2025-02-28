@@ -6,46 +6,45 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/26 20:38:34 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:34:41 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils.h"
 
-long int take_time(void)
+static void	input_checker(int argc, char **argv);
+
+int	main(int argc, char **argv)
 {
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (tv.tv_usec);
+	t_data	philo_s;
+	if (argc < 5 || argc > 6)
+		terminate_with_error(INPUT_NUMBER, -1);
+	input_checker(argc, argv);
+	init_value(argv, argc, &philo_s);
+	printf("Work\n");
 }
 
-float
-
-int main(int argc, char **argv)
+static void	input_checker(int argc, char **argv)
 {
-	long		x;
-	long		y;
+	int		x;
+	int		y;
 
-	x = take_time();
-	for (volatile long i = 0; i < 1000000; i++);
-	y = take_time();
-	printf("Time pass: %ld\n", y - x);
-	return (0);
+	x = 1;
+	y = 1;
+	while (argv[x])
+	{
+		y = 0;
+		while(argv[x][y])
+		{
+			if (argv[x][y] == ' ')
+				(void)argc;
+			else if(argv[x][y] < 48 || argv[x][y] > 57)
+			{
+				printf("%c | %d\n", argv[x][y], argv[x][y]);
+				terminate_with_error(INVALID_FORMAT, -1);
+			}
+			y++;
+		}
+		x++;
+	}
 }
-/*
-int main(int argc, char **argv)
-{
-	int		init_time;
-	int		end_time;
-	
-	printf("Init time: %d\n", init_time);
-	sleep(5);
-	gettimeofday(&tv, NULL); //atualizar os valores após sleep
-	end_time = tv.tv_sec;
-	printf("Final time: %d\n", end_time);
-	printf("Time: %d\n", (end_time - init_time));
-	printf("Seconds: %lu\n", tv.tv_sec);
-	printf("Miliseconds: %lu\n", tv.tv_usec);
-	return (0);
-}
-*/
