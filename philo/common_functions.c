@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/28 15:14:55 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:28:13 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_philo(t_data *philo_s)
 
 	if (philo_s == NULL)
 		return ;
-	(&philo_s->lock);
 	pthread_mutex_destroy(&philo_s->write);
 	if (philo_s->forks != NULL) {
 		i = 0;

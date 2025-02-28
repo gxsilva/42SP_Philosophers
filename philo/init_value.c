@@ -6,15 +6,18 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/28 17:29:27 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:31:26 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 void	init_value(char **argv, int argc, t_data *philo_s);
+static void	alloc_data(t_data *philo_s);
+static void	init_forks(t_data *philo_s);
+static void	init_philo(t_data *philo_s);
 
-void	init_data(char **argv, int argc, t_data *philo_s)
+static void	init_data(char **argv, int argc, t_data *philo_s)
 {
 	int		n_philo;
 
@@ -36,7 +39,7 @@ void	init_data(char **argv, int argc, t_data *philo_s)
 	pthread_mutex_init(&philo_s->lock, NULL); //protec shared variable of the race condition
 }
 
-void	alloc_data(t_data *philo_s)
+static void	alloc_data(t_data *philo_s)
 {
 	philo_s->tid = (pthread_t *)malloc(sizeof(pthread_t) * philo_s->philo_num);
 	if (!philo_s->tid)
@@ -58,8 +61,53 @@ void	alloc_data(t_data *philo_s)
 	}
 }
 
+static void	init_forks(t_data *philo_s)
+{
+	int		i;
+
+	i = 0;
+	while(i < philo_s->philo_num)
+	{
+		pthread_mutex_init(&philo_s->forks[i], NULL);
+		i++;
+	}
+	philo_s->philos[0].l_fork = &philo_s->forks[0];
+	philo_s->philos[0].r_fork = &philo_s->forks[philo_s->philo_num - 1];
+	i = 1;
+	while (i < philo_s->philo_num)
+	{
+		philo_s->philos[i].l_fork = &philo_s->forks[i];
+		philo_s->philos[i].r_fork = &philo_s->forks[i - 1];
+		i++;
+	}
+}
+
+static void	init_philo(t_data *philo_s)
+{
+	int		i;
+
+	i = 0;
+	while (i < philo_s->philo_num)
+	{
+		philo_s->philos[i].data = philo_s;
+		philo_s->philos[i].id = i + 1;
+		philo_s->philos[i].eat_cont = 0;
+		philo_s->philos[i].status = 0;
+		philo_s->philos[i].eating = 0;
+		philo_s->philos[i].time_to_die = philo_s->death_time;
+		/*
+			Init the mutex from the crr philo to prevent two
+			different thread to change it status.
+		*/
+		pthread_mutex_init(&philo_s->philos[i].lock, NULL);
+		i++;
+	}
+}
+
 void	init_value(char **argv, int argc, t_data *philo_s)
 {
 	init_data(argv, argc, philo_s);
 	alloc_data(philo_s);
+	init_forks(philo_s);
+	init_philo(philo_s);
 }

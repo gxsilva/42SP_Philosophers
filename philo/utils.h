@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/28 15:06:14 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:28:37 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,14 @@ typedef struct s_data // the main object
 
 /*LIBFT Functions*/
 int		ft_atoi(char *nbr);
-int		ft_strcmp(char *str1, char *str2);
 int		ft_strlen(char *str);
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
 
 /*Functions*/
 void	terminate_with_error(char *str, int exit_cod);
 void	init_value(char **argv, int argc, t_data *philo_s);
 void	free_philo(t_data *philo_s);
+void	init_value(char **argv, int argc, t_data *philo_s);
+
 
 
 #endif

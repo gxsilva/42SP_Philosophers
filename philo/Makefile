@@ -6,7 +6,7 @@
 #    By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 14:47:36 by lsilva-x          #+#    #+#              #
-#    Updated: 2025/02/28 14:21:08 by lsilva-x         ###   ########.fr        #
+#    Updated: 2025/02/28 18:30:10 by lsilva-x         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAG	= -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 SRC		=	main.c \
 			common_functions.c \
 			libft_functions.c \
+			init_value.c
 
 OBJ		= $(SRC:.c=.o)
 
