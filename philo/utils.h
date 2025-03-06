@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 15:02:26 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:04:32 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 
 /*Definitions*/
 # define DIED "died"
-# define TAKE_FORK "has taken a fork"
 # define EATING "is eating"
+# define TAKE_FORK "has taken a fork"
+# define DROP_FORK "is sleeping"
+# define THINK "is thinking"
 
 /*Struct definitions*/
 struct s_philo;
@@ -75,18 +77,23 @@ int			ft_atoi(char *nbr);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *str1, char *str2);
 
-
 /*Functions*/
-void		terminate_with_error(char *str, int exit_cod);
 void		init_value(char **argv, int argc, t_data *philo_s);
 void		free_philo(t_data *philo_s);
 void		init_value(char **argv, int argc, t_data *philo_s);
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
+int			ft_usleep(uint64_t time, t_philo *philo);
 
+/*Exit functions */
+void		ft_exit(t_data *philo_s);
+void		clear_data(t_data *philo_s);
+void		terminate_with_error(char *str, int exit_cod);
 
 /*Actions functions */
+void		*routine(void *args);
 void		eat(t_philo *philo);
+
 
 #endif
  

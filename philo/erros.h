@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:12:02 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/05 20:52:06 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:54:29 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@
 
 /*Thread Erros | cod -4*/
 # define TH_CREATE "An unexpected error when creating a thread"
+# define TH_JOIN "An unexpected error when join a thread"
 
 #endif

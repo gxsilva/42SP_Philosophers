@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:24:44 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 15:03:07 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:20:35 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	ft_strcmp(char *str1, char *str2)
 	return (((unsigned char)str1[i] - (unsigned char)str2[i]));
 }
 
-int	ft_usleep(useconds_t time)
+int	ft_usleep(uint64_t time, t_philo *philo)
 {
-	uint64_t	start;
+	uint64_t start;
 
-	start = get_time();
-	while ((get_time() - start) < time)
+	start = get_time(philo->data);
+	while ((get_time(philo->data) - start) < time)
 		usleep(time / 10);
 	return (0);
 }

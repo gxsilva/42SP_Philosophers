@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 14:58:03 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:08:06 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void message(char *str, t_philo *philo)
 {
 	uint64_t	time;
 
-	ptherad_mutex_lock(philo->data->write);
+	pthread_mutex_lock(&philo->data->write);
 	time = get_time(philo->data);
 	if (ft_strcmp(str, DIED) == 0 && philo->data->dead == 0)
 	{
@@ -68,5 +68,44 @@ void message(char *str, t_philo *philo)
 	}
 	if (!philo->data->dead)
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s", time, philo->id, str);
-	ptherad_mutex_unlock(philo->data->write);
+	pthread_mutex_unlock(&philo->data->write);
+}
+
+uint64_t	get_time(t_data *philo_s)
+{
+	struct timeval	tv;
+	uint64_t		cast_time;
+	
+	if (gettimeofday(&tv, NULL))
+	{
+		free_philo(philo_s);
+		terminate_with_error(FAILED_GET_TIME, -3);
+	}
+	cast_time = (uint64_t)((tv.tv_sec * 1000) / (tv.tv_usec / 1000));
+	return (cast_time);
+}
+
+void	clear_data(t_data *philo_s)
+{
+	if (philo_s->tid)
+		free(philo_s->tid);
+	if (philo_s->forks)
+		free(philo_s->forks);
+	if (philo_s->philos)
+		free(philo_s->philos);
+}
+
+void	ft_exit(t_data *philo_s)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo_s->philo_num)
+	{
+		pthread_mutex_destroy(&philo_s->forks[i]);
+		pthread_mutex_destroy(&philo_s->philos[i].lock);
+	}
+	pthread_mutex_destroy(&philo_s->write);
+	pthread_mutex_destroy(&philo_s->lock);
+	clear_data(philo_s);
 }
