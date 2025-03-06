@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 16:08:06 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:33:07 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ uint64_t	get_time(t_data *philo_s)
 		free_philo(philo_s);
 		terminate_with_error(FAILED_GET_TIME, -3);
 	}
-	cast_time = (uint64_t)((tv.tv_sec * 1000) / (tv.tv_usec / 1000));
+	cast_time = (uint64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 	return (cast_time);
 }
 

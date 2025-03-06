@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 16:07:30 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:23:44 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,42 @@ int	main(int argc, char **argv)
 	/*Handle with the case where has only one philo*/
 	if (philo_s.philo_num == 1)
 		single_philo(&philo_s);
-	if (init_philo(&philo_s))
+	else
+		init_philo(&philo_s);
 	return (0);
+}
+
+static void *monitor(void *args)
+{
+	t_philo		*philo;
+
+	philo = (t_philo *)args;
+	while (philo->data->dead == 0)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (philo->data->finished >= philo->data->philo_num)
+			philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->lock);
+	}
+	return (NULL);
 }
 
 int	init_philo(t_data *philo_s)
 {
 	int		i;
+	pthread_t	t0;
 
 	i = 0;
-	// * MONITOR ONLY WILL USE WHEND THE NBR_MEALS ARE > 0
-
-	// * ============
+	philo_s->start_time = get_time(philo_s);
+	if (philo_s->meals_nb > 0)
+		if(pthread_create(&t0, NULL, monitor, &philo_s->philos[0]))
+			terminate_with_error(TH_CREATE, -4);
 	while (i < philo_s->philo_num)
 	{
+		printf("aa\n");
 		if(pthread_create(&philo_s->tid[i], NULL, routine, &philo_s->philos[i]))
 			terminate_with_error(TH_CREATE, -4);
+		ft_usleep(1, &philo_s->philos[i]);
 		i++;
 	}
 	i = 0;
@@ -108,14 +128,11 @@ static void	single_philo(t_data *philo_s)
 		free_philo(philo_s);
 		terminate_with_error(TH_CREATE, -4);
 	}
-	//gives thread independence
 	pthread_detach(philo_s->tid[0]);
 	while (philo_s->dead == 0)
 		ft_usleep(0, &philo_s->philos[0]);
 	ft_exit(philo_s);
 }
-
-
 
 static void	input_checker(int argc, char **argv)
 {
