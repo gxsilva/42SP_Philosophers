@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/05 21:04:09 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:00:56 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,46 @@ int	main(int argc, char **argv)
 	printf("Work\n");
 }
 
-static uint64_t	get_time(t_data *philo_s)
+
+//responsible to verify and update informations
+static void *supervisor(void *args)
 {
-	struct timeval	tv;
-	uint64_t		cast_time;
-	
-	if (gettimeofday(&tv, NULL))
+	t_philo		*philo;
+
+	philo	= (t_philo *)args;
+	//start the supervisor
+	while (philo->data->dead == 0)
 	{
-		free_philo(philo_s);
-		terminate_with_error(FAILED_GET_TIME, -3);
+		ptherad_mutex_lock(&philo->lock);
+		if (get_time(philo->data) >= philo->time_to_die && philo->eating == 0)
+			message(DIED, philo);
+		else if (philo->eat_cont == philo->data->meals_nb)
+		{
+			ptherad_mutex_lock(&philo->data->lock);
+			philo->data->finished++;
+			philo->eat_cont++;
+			ptherad_mutex_unlock(&philo->data->lock);
+		} 
 	}
-	cast_time = (uint64_t)((tv.tv_sec * 1000) / (tv.tv_usec / 1000));
-	return (cast_time);
+	ptherad_mutex_unlock(&philo->lock);
+	return (NULL);
 }
 
 static void	routine(void *args)
 {
-	/*args is the philo ptr*/
-	
+	t_philo		*philo;
+
+	philo = (t_philo *)args;
+	philo->time_to_die = philo->data->death_time + get_time(philo->data);
+	if (ptherad_create(&philo->t1, NULL, supervisor, (void *)philo) != 0)
+	{
+		free_philo(philo->data);
+		terminate_with_error(TH_CREATE, -4);
+	}
+	while (philo->data->dead == 0)
+	{
+		
+	}
 }
 
 static void	single_philo(t_data *philo_s)
