@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/28 18:28:37 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:55:32 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/time.h>
+# include <sys/time.h> //struct timeval | gettimeofday
 # include <pthread.h>
 # include <stdint.h> //! REMOVE
 # include "erros.h"
