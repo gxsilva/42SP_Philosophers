@@ -6,18 +6,19 @@
 #    By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 14:47:36 by lsilva-x          #+#    #+#              #
-#    Updated: 2025/02/28 18:30:10 by lsilva-x         ###   ########.fr        #
+#    Updated: 2025/03/06 15:57:55 by lsilva-x         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
 NAME	= philo
-CFLAG	= -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
+CFLAG	= -Wall -Wextra -Werror -W -pthread -Wunreachable-code -Ofast -g
 
 SRC		=	main.c \
 			common_functions.c \
 			libft_functions.c \
-			init_value.c
+			init_value.c \
+			actions.c \
 
 OBJ		= $(SRC:.c=.o)
 
