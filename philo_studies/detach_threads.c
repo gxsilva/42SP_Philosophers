@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:56:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/26 18:17:28 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:52:56 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /*
 	A função _pthread_detach_ serve para dar independencia a um thread
-	pois ao passa uma thread como detach não é necessário utilizar pthread_join
+	pois ao passar uma thread como detach não é necessário utilizar pthread_join
 	pois seus recursos sao liberados automáticamente quando ela termianr.
 */
 static void	exit_program(void)
