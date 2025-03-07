@@ -6,14 +6,14 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:12:51 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:07:32 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils.h"
 
 static void	single_philo(t_data *philo_s);
-static int	start_philo(t_data *philo_s);
+static int	many_philo(t_data *philo_s);
 
 int	main(int argc, char **argv)
 {
@@ -27,11 +27,11 @@ int	main(int argc, char **argv)
 	if (philo_s.philo_num == 1)
 		single_philo(&philo_s);
 	else
-		start_philo(&philo_s);
+		many_philo(&philo_s);
 	return (0);
 }
 
-int	start_philo(t_data *philo_s)
+int	many_philo(t_data *philo_s)
 {
 	int		i;
 	pthread_t	t0;
@@ -43,7 +43,7 @@ int	start_philo(t_data *philo_s)
 			terminate_with_error(TH_CREATE, -4);
 	while (i < philo_s->philo_num)
 	{
-		if(pthread_create(&philo_s->tid[i], NULL, routine, &philo_s->philos[i]))
+		if(pthread_create(&philo_s->tid[i], NULL, &routine, (void *)&philo_s->philos[i]))
 			terminate_with_error(TH_CREATE, -4);
 		ft_usleep(1, &philo_s->philos[i]);
 		i++;

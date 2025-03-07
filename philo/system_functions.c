@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:01:03 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:05:14 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void *supervisor(void *args)
 		pthread_mutex_lock(&philo->lock);
 		if (get_time(philo->data) >= philo->time_to_die && philo->eating == 0)
 			message(DIED, philo);
-		else if (philo->eat_cont == philo->data->meals_nb)
+		if (philo->eat_cont == philo->data->meals_nb)
 		{
 			pthread_mutex_lock(&philo->data->lock);
 			philo->data->finished++;
-			philo->eat_cont++;
+			philo->eat_cont++; // ??? wtf is this
 			pthread_mutex_unlock(&philo->data->lock);
 		} 
 	}

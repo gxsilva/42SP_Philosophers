@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:24:44 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 16:34:47 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:01:41 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int		ft_atoi(char *nbr);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *str1, char *str2);
-
-int	ft_atoi(char *nbr)
+int		ft_usleep(uint64_t time, t_philo *philo);
+int		ft_atoi(char *nbr)
 {
 	int		i;
 	int		signal;
@@ -66,7 +66,7 @@ int	ft_strcmp(char *str1, char *str2)
 
 int	ft_usleep(uint64_t time, t_philo *philo)
 {
-	uint64_t start;
+	uint64_t		start;
 
 	start = get_time(philo->data);
 	while ((get_time(philo->data) - start) < time)

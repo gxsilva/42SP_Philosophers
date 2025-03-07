@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:09:44 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:41:25 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void		*routine(void *args);
 
 /*Actions functions */
 void		eat(t_philo *philo);
+void		drop_forks(t_philo *philo);
+void		take_forks(t_philo *philo);
 
 
 #endif
