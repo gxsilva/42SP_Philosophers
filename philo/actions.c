@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 15:27:31 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 20:51:34 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	message(TAKE_FORK, philo);
-	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(philo->r_fork);
 	message(TAKE_FORK, philo);
 }
 

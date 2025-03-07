@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/02/28 18:31:26 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 20:53:30 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_data(char **argv, int argc, t_data *philo_s)
 		terminate_with_error(PHI_OUT_RANGE, -1);
 	}
 	philo_s->philo_num = n_philo;
+	philo_s->dead = 0;
 	philo_s->death_time = ft_atoi(argv[2]);
 	philo_s->eat_time = ft_atoi(argv[3]);
 	philo_s->sleep_time = ft_atoi(argv[4]);
@@ -47,7 +48,7 @@ static void	alloc_data(t_data *philo_s)
 		free_philo(philo_s);
 		terminate_with_error(FAILED_MALLOC, -2);
 	}
-	philo_s->forks = malloc(sizeof(pthread_mutex_t *) *  philo_s->philo_num);
+	philo_s->forks = malloc(sizeof(pthread_mutex_t) * philo_s->philo_num);
 	if (!philo_s->forks)
 	{
 		free_philo(philo_s);

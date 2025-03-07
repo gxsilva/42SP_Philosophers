@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 16:04:32 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:09:44 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_data // the main object
 	/*Mutex stuffs */
 	pthread_mutex_t	*forks; // Array of the mutex(forks) shared by the philoshopers
 	pthread_mutex_t	lock; // A mutex to prevent "race condition"
-	pthread_mutex_t	write; // ??
+	pthread_mutex_t	write; // The mutex to prevent "race condition" in stdout
 } t_data;
 
 /*LIBFT Functions*/
@@ -84,14 +84,19 @@ void		init_value(char **argv, int argc, t_data *philo_s);
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
 int			ft_usleep(uint64_t time, t_philo *philo);
+void		input_checker(int argc, char **argv);
 
 /*Exit functions */
 void		ft_exit(t_data *philo_s);
 void		clear_data(t_data *philo_s);
 void		terminate_with_error(char *str, int exit_cod);
 
-/*Actions functions */
+/*System functions*/
+void		*monitor(void *args);
+void		*supervisor(void *args);
 void		*routine(void *args);
+
+/*Actions functions */
 void		eat(t_philo *philo);
 
 
