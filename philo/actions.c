@@ -6,14 +6,13 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 20:51:34 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:43:52 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-
-static void take_forks(t_philo *philo)
+static void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	message(TAKE_FORK, philo);
@@ -21,7 +20,7 @@ static void take_forks(t_philo *philo)
 	message(TAKE_FORK, philo);
 }
 
-static void drop_forks(t_philo *philo)
+static void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -29,12 +28,12 @@ static void drop_forks(t_philo *philo)
 	ft_usleep(philo->data->sleep_time, philo);
 }
 
-void eat(t_philo *philo)
+void	eat(t_philo *philo)
 {
 	take_forks(philo);
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = 1;
-	philo->time_to_die = get_time(philo->data) + philo->data->death_time; //reset time to die
+	philo->time_to_die = get_time(philo->data) + philo->data->death_time;
 	message(EATING, philo);
 	philo->eat_cont++;
 	ft_usleep(philo->data->eat_time, philo);
@@ -42,8 +41,3 @@ void eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);
 }
-
-/*
-	philo -> take fork Right -> take fork Left -> eat_time -> release right fork
-	-> release left fork -> sleep time
-*/

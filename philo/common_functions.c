@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:06:56 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:36:44 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
-void	input_checker(int argc, char **argv);
+void		input_checker(int argc, char **argv);
 
-void message(char *str, t_philo *philo)
+void	message(char *str, t_philo *philo)
 {
 	uint64_t	time;
 
@@ -36,7 +36,7 @@ uint64_t	get_time(t_data *philo_s)
 {
 	struct timeval	tv;
 	uint64_t		cast_time;
-	
+
 	if (gettimeofday(&tv, NULL))
 	{
 		free_philo(philo_s);
@@ -56,11 +56,11 @@ void	input_checker(int argc, char **argv)
 	while (argv[x])
 	{
 		y = 0;
-		while(argv[x][y])
+		while (argv[x][y])
 		{
 			if (argv[x][y] == ' ')
 				(void)argc;
-			else if(argv[x][y] < 48 || argv[x][y] > 57)
+			else if (argv[x][y] < 48 || argv[x][y] > 57)
 			{
 				printf("%c | %d\n", argv[x][y], argv[x][y]);
 				terminate_with_error(INVALID_FORMAT, -1);

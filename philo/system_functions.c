@@ -6,13 +6,13 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:01:03 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:44:34 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void *monitor(void *args)
+void	*monitor(void *args)
 {
 	t_philo		*philo;
 
@@ -26,13 +26,12 @@ void *monitor(void *args)
 	}
 	return (NULL);
 }
-//responsible to verify and update informations
-void *supervisor(void *args)
+
+void	*supervisor(void *args)
 {
 	t_philo		*philo;
 
-	philo	= (t_philo *)args;
-	//start the supervisor
+	philo = (t_philo *)args;
 	while (philo->data->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
@@ -44,9 +43,9 @@ void *supervisor(void *args)
 			philo->data->finished++;
 			philo->eat_cont++;
 			pthread_mutex_unlock(&philo->data->lock);
-		} 
+		}
+		pthread_mutex_unlock(&philo->lock);
 	}
-	pthread_mutex_unlock(&philo->lock);
 	return (NULL);
 }
 

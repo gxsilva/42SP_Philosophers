@@ -6,13 +6,13 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 20:53:30 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:45:03 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	init_value(char **argv, int argc, t_data *philo_s);
+void		init_value(char **argv, int argc, t_data *philo_s);
 static void	alloc_data(t_data *philo_s);
 static void	init_forks(t_data *philo_s);
 static void	init_philo(t_data *philo_s);
@@ -36,8 +36,8 @@ static void	init_data(char **argv, int argc, t_data *philo_s)
 		philo_s->meals_nb = ft_atoi(argv[5]);
 	else
 		philo_s->meals_nb = -1;
-	pthread_mutex_init(&philo_s->write, NULL); // Prevent multiple thread to write in STDOUT
-	pthread_mutex_init(&philo_s->lock, NULL); //protec shared variable of the race condition
+	pthread_mutex_init(&philo_s->write, NULL);
+	pthread_mutex_init(&philo_s->lock, NULL);
 }
 
 static void	alloc_data(t_data *philo_s)
@@ -67,7 +67,7 @@ static void	init_forks(t_data *philo_s)
 	int		i;
 
 	i = 0;
-	while(i < philo_s->philo_num)
+	while (i < philo_s->philo_num)
 	{
 		pthread_mutex_init(&philo_s->forks[i], NULL);
 		i++;
@@ -96,10 +96,6 @@ static void	init_philo(t_data *philo_s)
 		philo_s->philos[i].status = 0;
 		philo_s->philos[i].eating = 0;
 		philo_s->philos[i].time_to_die = philo_s->death_time;
-		/*
-			Init the mutex from the crr philo to prevent two
-			different thread to change it status.
-		*/
 		pthread_mutex_init(&philo_s->philos[i].lock, NULL);
 		i++;
 	}

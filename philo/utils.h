@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:09:44 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:36:11 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/time.h> //struct timeval | gettimeofday
+# include <sys/time.h>
 # include <pthread.h>
-# include <stdint.h> //! REMOVE
+# include <stdint.h>
 # include "erros.h"
 
 /*Definitions*/
@@ -31,53 +31,44 @@
 # define THINK "is thinking"
 
 /*Struct definitions*/
-struct s_philo;
-struct s_data;
+struct	s_philo;
+struct	s_data;
 
 /*Structures*/
 typedef struct s_philo
 {
-	struct s_data	*data; // pointer to the global structured shared by al the philo
-	pthread_t		t1; // the individual thread of each philo
-	int				id; // the identificator of each pihlo (0 -> philo_n - 1)
-	int				eat_cont; // how many times this philo eat
-	int				status; // the current state of the philo (eating, sleeping or dead)
-	int				eating; // a flag to indicate if the philo is eating(1) OR NOT (0)
-	uint64_t		time_to_die; // the time this philo will die if it not will eat
-	pthread_mutex_t	lock; // the mutex to prevent "race condition"
-	pthread_mutex_t	*r_fork; // the right fork
-	pthread_mutex_t	*l_fork; // the left fork
-} t_philo;
+	struct s_data	*data;
+	pthread_t		t1;
+	int				id;
+	int				eat_cont;
+	int				status;
+	int				eating;
+	uint64_t		time_to_die;
+	pthread_mutex_t	lock;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
+}	t_philo;
 
-typedef struct s_data // the main object
+typedef struct s_data
 {
-	pthread_t		*tid; // An array of each thread in the program
-	t_philo			*philos; // An array of objects of each philo
+	pthread_t		*tid;
+	t_philo			*philos;
+	int				philo_num;
+	int				meals_nb;
+	int				dead;
+	int				finished;
+	uint64_t		death_time;
+	uint64_t		eat_time;
+	uint64_t		sleep_time;
+	uint64_t		start_time;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	lock;
+	pthread_mutex_t	write;
+}	t_data;
 
-	/*Informations*/
-	int				philo_num; // how many philo are in the exectuion
-	int				meals_nb; // number of meals of each philo must done until the program finish
-	int				dead;	// 0 = any philo dies | if anyone dies the program stop
-	int				finished; // if the philo has a amout of meals
-	
-	/*Time of each iteration */
-	uint64_t		death_time; // time in miliseconds that each philo can dont meal until it dies
-	uint64_t		eat_time; // time it takes a philosopher to eat
-	uint64_t		sleep_time; // time it takes a philosopher to stay sleep
-	uint64_t		start_time; // the initial time of the simulation
-
-	/*Mutex stuffs */
-	pthread_mutex_t	*forks; // Array of the mutex(forks) shared by the philoshopers
-	pthread_mutex_t	lock; // A mutex to prevent "race condition"
-	pthread_mutex_t	write; // The mutex to prevent "race condition" in stdout
-} t_data;
-
-/*LIBFT Functions*/
 int			ft_atoi(char *nbr);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *str1, char *str2);
-
-/*Functions*/
 void		init_value(char **argv, int argc, t_data *philo_s);
 void		free_philo(t_data *philo_s);
 void		init_value(char **argv, int argc, t_data *philo_s);
@@ -85,20 +76,12 @@ void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
 int			ft_usleep(uint64_t time, t_philo *philo);
 void		input_checker(int argc, char **argv);
-
-/*Exit functions */
 void		ft_exit(t_data *philo_s);
 void		clear_data(t_data *philo_s);
 void		terminate_with_error(char *str, int exit_cod);
-
-/*System functions*/
 void		*monitor(void *args);
 void		*supervisor(void *args);
 void		*routine(void *args);
-
-/*Actions functions */
 void		eat(t_philo *philo);
 
-
 #endif
- 
