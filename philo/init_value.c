@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/07 19:00:14 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:08:01 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_data(char **argv, int argc, t_data *philo_s)
 
 static void	alloc_data(t_data *philo_s)
 {
-	philo_s->tid = (pthread_t *)malloc(sizeof(pthread_t) * philo_s->philo_num);
+	philo_s->tid = malloc(sizeof(pthread_t) * philo_s->philo_num);
 	if (!philo_s->tid)
 	{
 		free_philo(philo_s);

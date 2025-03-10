@@ -6,13 +6,13 @@
 #    By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 14:47:36 by lsilva-x          #+#    #+#              #
-#    Updated: 2025/03/06 21:12:50 by lsilva-x         ###   ########.fr        #
+#    Updated: 2025/03/09 20:12:01 by lsilva-x         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
 NAME	= philo
-CFLAG	= -Wall -Wextra -Werror -W -pthread -Wunreachable-code -Ofast -g
+CFLAG	= -Wall -Wextra -Werror -pthread -Wunreachable-code -g
 
 SRC		=	main.c \
 			common_functions.c \

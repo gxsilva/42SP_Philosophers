@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/06 21:06:05 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:15:51 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ podendo ocasionar em doublee free ou undefined Behavior
 */
 void	free_philo(t_data *philo_s) 
 {
+	printf("Philo freelado");
 	int i;
-
 	if (philo_s == NULL)
 		return ;
 	pthread_mutex_destroy(&philo_s->write);

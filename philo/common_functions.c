@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/07 19:03:28 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:31:22 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void message(char *str, t_philo *philo)
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);
 		philo->data->dead = 1;
 	}
-	if (!philo->data->dead)
+	else if (!philo->data->dead)
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
 }

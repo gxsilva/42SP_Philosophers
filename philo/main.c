@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/07 19:07:32 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:40:50 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	many_philo(t_data *philo_s)
 	i = 0;
 	philo_s->start_time = get_time(philo_s);
 	if (philo_s->meals_nb > 0)
-		if(pthread_create(&t0, NULL, monitor, &philo_s->philos[0]))
+		if(pthread_create(&t0, NULL, &monitor, &philo_s->philos[0]))
 			terminate_with_error(TH_CREATE, -4);
 	while (i < philo_s->philo_num)
 	{
@@ -53,6 +53,7 @@ int	many_philo(t_data *philo_s)
 	{
 		if (pthread_join(philo_s->tid[i], NULL))
 			terminate_with_error(TH_JOIN, -4);
+		i++;
 	}
 	return (0);
 }
