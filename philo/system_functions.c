@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/09 20:40:50 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:28:56 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void *supervisor(void *args)
 			philo->eat_cont++; // ??? wtf is this
 			pthread_mutex_unlock(&philo->data->lock);
 		} 
+		pthread_mutex_unlock(&philo->lock);
 	}
-	pthread_mutex_unlock(&philo->lock);
 	return (NULL);
 }
 
@@ -61,7 +61,7 @@ void	*routine(void *args)
 		free_philo(philo->data);
 		terminate_with_error(TH_CREATE, -4);
 	}
-	while (1)
+	while (philo->data->dead == 0)
 	{
 		eat(philo);
 		message(THINK, philo);
