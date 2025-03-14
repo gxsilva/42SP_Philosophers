@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 15:39:25 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:02:09 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 		single_philo(&philo_s);
 	else
 		start_philo(&philo_s);
+	free_philo(&philo_s);
 	return (0);
 }
 

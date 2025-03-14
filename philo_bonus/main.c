@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:05 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:22:58 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:27:15 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	start_philo(t_data *philo_s)
 	while (i < philo_s->philo_num)
 	{
 		start_routine(philo_s, i);
-		i += 2;
+		i++;
 	}
 	i = 1;
 	while (i < philo_s->philo_num)

@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:58:48 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:09:10 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:34:25 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,10 @@
 
 static void	take_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-	{
-		sem_wait(philo->data->forks);
-		message(TAKE_FORK, philo);
-		sem_wait(philo->data->forks);
-		message(TAKE_FORK, philo);
-	}
-	else
-	{
-		sem_wait(philo->data->forks);
-		message(TAKE_FORK, philo);
-		sem_wait(philo->data->forks);
-		message(TAKE_FORK, philo);
-	}
+	sem_wait(philo->data->forks);
+	message(TAKE_FORK, philo);
+	sem_wait(philo->data->forks);
+	message(TAKE_FORK, philo);
 }
 
 static void	drop_forks(t_philo *philo)
