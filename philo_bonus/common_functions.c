@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:17:40 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:03:55 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	message(char *str, t_philo *philo)
 	{
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);
 		philo->data->dead = 1;
+
 	}
 	if (!philo->data->dead)
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);

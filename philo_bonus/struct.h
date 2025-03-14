@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:43:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:15:06 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:00:48 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,4 @@ typedef struct s_data
 	sem_t	*write;
 }	t_data;
 
-
-
-
-
-/*
-	sem_t -> semaphores
-*/
 # endif
