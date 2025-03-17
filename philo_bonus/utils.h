@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:18:22 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:42:24 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <sys/wait.h>
 # include <semaphore.h>
 # include <stdint.h>
 # include <fcntl.h>
@@ -52,5 +53,15 @@ int		ft_usleep(uint64_t time, t_philo *philo);
 void	message(char *str, t_philo *philo);
 void	input_checker(int argc, char **argv);
 uint64_t	get_time(t_data *philo_s);
+void	update_state(t_data *philo_s, int new_state);
+short	get_state(t_data *philo_s);
 
+/* idk functions */
+int		start_routine(t_data *philo_s, int id);
+void	*supervisor(void *args);
+int		monitor(t_data *philo_s);
+int		take_process(t_data *philo_s);
+int		start_philo(t_data *philo_s);
+void	kill_process(t_data *philo_s);
 #endif
+
