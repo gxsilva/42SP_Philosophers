@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:17:40 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:28:32 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ void	message(char *str, t_philo *philo)
 	sem_wait(philo->data->write);
 	time = get_time(philo->data) - philo->data->start_time;
 	if (ft_strcmp(str, DIED) == 0 && philo->data->dead == 0)
-	{
-		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);
-		philo->data->dead = 1;
-	}
+		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id + 1, str);
 	if (!philo->data->dead)
-		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id, str);
+		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id + 1, str);
 	sem_post(philo->data->write);
 }
 
@@ -45,7 +42,6 @@ uint64_t	get_time(t_data *philo_s)
 	cast_time = (uint64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 	return (cast_time);
 }
-
 
 void	input_checker(int argc, char **argv)
 {
@@ -70,4 +66,21 @@ void	input_checker(int argc, char **argv)
 		}
 		x++;
 	}
+}
+
+void	update_state(t_data *philo_s, int new_state)
+{
+	sem_wait(philo_s->lock);
+	philo_s->dead = new_state;
+	sem_post(philo_s->lock);
+}
+
+short	get_state(t_data *philo_s)
+{
+	int	state;
+
+	sem_wait(philo_s->lock);
+	state = philo_s->dead;
+	sem_post(philo_s->lock);
+	return (state);
 }

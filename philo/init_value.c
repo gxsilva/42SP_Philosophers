@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 15:45:03 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:26:00 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ static void	init_data(char **argv, int argc, t_data *philo_s)
 
 	n_philo = ft_atoi(argv[1]);
 	if (n_philo <= 0 || n_philo > 200)
-	{
-		free(philo_s);
 		terminate_with_error(PHI_OUT_RANGE, -1);
-	}
 	philo_s->philo_num = n_philo;
 	philo_s->dead = 0;
+	philo_s->finished = 0;
 	philo_s->death_time = ft_atoi(argv[2]);
 	philo_s->eat_time = ft_atoi(argv[3]);
 	philo_s->sleep_time = ft_atoi(argv[4]);

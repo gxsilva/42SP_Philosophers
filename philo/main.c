@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 15:39:25 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:15:52 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 		single_philo(&philo_s);
 	else
 		start_philo(&philo_s);
+	free_philo(&philo_s);
 	return (0);
 }
 
@@ -56,6 +57,8 @@ int	start_philo(t_data *philo_s)
 			terminate_with_error(TH_JOIN, -4);
 		i++;
 	}
+	if (t0)
+		pthread_join(t0, NULL);
 	return (0);
 }
 
@@ -63,12 +66,9 @@ static void	single_philo(t_data *philo_s)
 {
 	philo_s->start_time = get_time(philo_s);
 	if (pthread_create(&philo_s->tid[0], NULL, &routine, &philo_s->philos[0]))
-	{
-		free_philo(philo_s);
 		terminate_with_error(TH_CREATE, -4);
-	}
 	pthread_detach(philo_s->tid[0]);
 	while (philo_s->dead == 0)
 		ft_usleep(0, &philo_s->philos[0]);
-	ft_exit(philo_s);
+	free_philo(philo_s);
 }
