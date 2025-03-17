@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 19:19:56 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:33:08 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*supervisor(void *args)
 			message(DIED, philo);
 			break;
 		}
-		
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -51,7 +51,7 @@ int	start_routine(t_data *philo_s, int id)
 			message(THINK, philo);
 		}
 		pthread_join(philo->t1, NULL);
-		exit (0);
+		exit (1);
 	}
 	philo_s->pid[id] = pid;
 	return (0);

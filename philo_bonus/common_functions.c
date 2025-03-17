@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 19:20:51 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:28:32 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	message(char *str, t_philo *philo)
 	sem_wait(philo->data->write);
 	time = get_time(philo->data) - philo->data->start_time;
 	if (ft_strcmp(str, DIED) == 0 && philo->data->dead == 0)
-	{
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id + 1, str);
-	}
 	if (!philo->data->dead)
 		printf("[TIME]: %lu [PHILO]: %d [ACTION]: %s\n", time, philo->id + 1, str);
 	sem_post(philo->data->write);
