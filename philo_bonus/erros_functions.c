@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/13 21:18:31 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:46:05 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	terminate_with_error(char *str, int exit_cod)
 
 static void	free_node(t_data *philo_s)
 {
-	// int		i;
-
 	if (philo_s->philos != NULL)
 	{
 		free(philo_s->philos);

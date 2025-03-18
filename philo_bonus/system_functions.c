@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 19:33:08 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:50:17 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*supervisor(void *args)
 	t_philo		*philo;
 
 	philo = (t_philo *)args;
-	while (1)
+	while (!get_state(philo->data))
 	{
 		if (get_time(philo->data) >= philo->time_to_die && philo->eating == 0)
 		{
@@ -109,7 +109,7 @@ int	take_process(t_data *philo_s)
 		i++;
 		if (i >= philo_s->philo_num)
 			i = 0;
-		usleep(50);
+		// usleep(50);
 	}
 	return (0);
 }

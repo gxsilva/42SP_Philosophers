@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 17:40:15 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:19:47 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	message(DROP_FORK, philo);
+	message(SLEEP, philo);
 	ft_usleep(philo->data->sleep_time, philo);
 }
 

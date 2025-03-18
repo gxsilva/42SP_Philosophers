@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:58:48 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 19:31:50 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:19:47 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	drop_forks(t_philo *philo)
 {
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
-	message(DROP_FORK, philo);
+	message(SLEEP, philo);
 	ft_usleep(philo->data->sleep_time, philo);
 }
 
