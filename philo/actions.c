@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 17:19:47 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 01:47:34 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,10 @@
 
 static void	take_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->l_fork);
-		message(TAKE_FORK, philo);
-		pthread_mutex_lock(philo->r_fork);
-		message(TAKE_FORK, philo);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->r_fork);
-		message(TAKE_FORK, philo);
-		pthread_mutex_lock(philo->l_fork);
-		message(TAKE_FORK, philo);
-	}
+	pthread_mutex_lock(philo->r_fork);
+	message(TAKE_FORK, philo);
+	pthread_mutex_lock(philo->l_fork);
+	message(TAKE_FORK, philo);
 }
 
 static void	drop_forks(t_philo *philo)

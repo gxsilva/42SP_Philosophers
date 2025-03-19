@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 15:36:11 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 01:34:27 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define DIED "died"
 # define EATING "is eating"
 # define TAKE_FORK "has taken a fork"
-# define DROP_FORK "is sleeping"
+# define SLEEP "is sleeping"
 # define THINK "is thinking"
 
 /*Struct definitions*/

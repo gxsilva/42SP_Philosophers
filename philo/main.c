@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 15:36:37 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 01:48:10 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,10 @@ int	start_philo(t_data *philo_s)
 		ft_usleep(1, &philo_s->philos[i]);
 		i++;
 	}
-	i = 0;
-	while (i < philo_s->philo_num)
-	{
+	i = -1;
+	while (++i < philo_s->philo_num)
 		if (pthread_join(philo_s->tid[i], NULL))
 			terminate_with_error(TH_JOIN, -4);
-		i++;
-	}
 	if (t0)
 		pthread_join(t0, NULL);
 	return (0);
