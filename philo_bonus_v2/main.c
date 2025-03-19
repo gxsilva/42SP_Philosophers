@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:23:38 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 18:27:45 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:12:43 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@ int main(int argc, char **argv)
 
 int	kill_process(t_data *philo_s)
 {
-	printf("Kill process\n");
 	int	i;
 
 	i = 0;
 	while (i < philo_s->philo_num)
 	{
-		if (philo_s->pid[i] > 0)
-			kill(philo_s->pid[i], SIGTERM);
+		if (philo_s->philos[i].pid > 0)
+			kill(philo_s->philos[i].pid, SIGTERM);
 		i++;
 	}
 	return (0);

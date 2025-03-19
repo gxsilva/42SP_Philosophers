@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 18:08:57 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:58:56 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			eat(t_philo *philo);
 int			take_forks(t_philo *philo);
 void		drop_forks(t_philo *philo);
 int			sleep_ph(t_philo *philo);
+int			think_ph(t_philo *philo);
 
 /*same error functions*/
 void		terminate_with_error(char *str, int exit_cod);

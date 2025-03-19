@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 20:50:17 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/18 23:40:45 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,6 @@ void	*supervisor(void *args)
 	return (NULL);
 }
 
-int	start_routine(t_data *philo_s, int id)
-{
-	pid_t	pid;
-	t_philo	*philo;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		philo = &philo_s->philos[id];
-		philo->time_to_die = philo->data->death_time + get_time(philo->data);
-		if (pthread_create(&philo->t1, NULL, supervisor, (void *)philo) != 0)
-		{
-			free_philo(philo->data);
-			terminate_with_error(TH_CREATE, -4);
-		}
-		while (get_state(philo->data) != 1)
-		{
-			eat(philo);
-			message(THINK, philo);
-		}
-		pthread_join(philo->t1, NULL);
-		exit (1);
-	}
-	philo_s->pid[id] = pid;
-	return (0);
-}
 
 int	monitor(t_data *philo_s)
 {
@@ -123,6 +97,34 @@ int	start_philo(t_data *philo_s)
 	while (++i < philo_s->philo_num)
 		start_routine(philo_s, i);
 	// monitor(philo_s);
+	printf("take process\n");
 	take_process(philo_s);
+	return (0);
+}
+
+int	start_routine(t_data *philo_s, int id)
+{
+	pid_t	pid;
+	t_philo	*philo;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		philo = &philo_s->philos[id];
+		philo->time_to_die = philo->data->death_time + get_time(philo->data);
+		if (pthread_create(&philo->t1, NULL, supervisor, (void *)philo) != 0)
+		{
+			free_philo(philo->data);
+			terminate_with_error(TH_CREATE, -4);
+		}
+		while (get_state(philo->data) != 1)
+		{
+			eat(philo);
+			message(THINK, philo);
+		}
+		pthread_join(philo->t1, NULL);
+		exit (1);
+	}
+	philo_s->pid[id] = pid;
 	return (0);
 }

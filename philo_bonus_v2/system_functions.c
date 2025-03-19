@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 19:07:04 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 03:02:20 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*supervisor(void *args) //? okay
 		{
 			update_state(philo->data, 1);
 			message(DIED, DIED, philo);
+			// sem_wait(philo->data->s_write);
 			break;
 		}
 		usleep(10);
@@ -41,10 +42,10 @@ int	start_routine(t_data *philo_s, int id)
 	pid_t	pid;
 	t_philo	*philo;
 
+	philo = &philo_s->philos[id];
 	pid = fork();
 	if (pid == 0)
 	{
-		philo = &philo_s->philos[id];
 		philo->time_to_die = philo->data->death_time + get_time(philo->data);
 		if (pthread_create(&philo->t1, NULL, supervisor, (void *)philo))
 		{
@@ -55,7 +56,7 @@ int	start_routine(t_data *philo_s, int id)
 		{
 			if(philo->data->meals_nb > -1)
 				if (philo->eat_cont >= philo->data->meals_nb)
-					exit (0); //? FINISH
+					exit (0);
 			if (take_forks(philo))
 				break ;
 			if(eat(philo))
@@ -64,12 +65,14 @@ int	start_routine(t_data *philo_s, int id)
 				break ;
 			}
 			drop_forks(philo);
-			if (philo->data->philo_num % 2 != 0)
 			sleep_ph(philo);
+			// if (philo->data->philo_num % 2 != 0)
+			// 	think_ph(philo);
 		}
 		pthread_join(philo->t1, NULL);
-		exit (1); //? DIE
+		exit (1);
 	}
+	philo->pid = pid;
 	philo_s->pid[id] = pid;
 	return (0);
 }
@@ -90,15 +93,15 @@ int	monitor(t_data *philo_s)
 			if (waitpid(philo_s->philos[i].pid, &status, WNOHANG) > 0)
 			{
 				if (WEXITSTATUS(status) == 1)
-					return(kill_process(philo_s));
-				if (WEXITSTATUS(status) == 0)
+					return(kill_process(philo_s), 1);
+				else if (WEXITSTATUS(status) == 0)
 					finished++;
 			}
 			i++;
 		}
 		if (philo_s->philo_num == finished)
 			return (kill_process(philo_s), 1);
-		usleep(10);
+		usleep(80);
 	}
 	return (0);
 }
@@ -120,6 +123,7 @@ int	take_process(t_data *philo_s)
 				break ;
 			}
 		}
+		i++;
 	}
 	return (0);
 }

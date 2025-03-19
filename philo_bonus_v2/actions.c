@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:58:48 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 18:06:14 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 03:01:48 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,20 @@ int	eat(t_philo *philo)
 	return (0);
 }
 
-int	sleep_ph(t_philo *philo)
+int	think_ph(t_philo *philo)
 {
 	if (get_state(philo->data))
 		return (1);
 	message(THINK, THINK, philo);
+	ft_usleep(philo->data->sleep_time, philo);
+	return (0);
+}
+
+int	sleep_ph(t_philo *philo)
+{
+	if (get_state(philo->data))
+		return (1);
+	message(SLEEP, SLEEP, philo);
 	ft_usleep(philo->data->sleep_time, philo);
 	return (0);
 	

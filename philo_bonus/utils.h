@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 18:42:24 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 01:31:42 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define DIED "died"
 # define EATING "is eating"
 # define TAKE_FORK "has taken a fork"
-# define DROP_FORK "is sleeping"
+# define SLEEP "is sleeping"
 # define THINK "is thinking"
 
 void	input_checker(int argc, char **argv);
@@ -62,6 +62,7 @@ void	*supervisor(void *args);
 int		monitor(t_data *philo_s);
 int		take_process(t_data *philo_s);
 int		start_philo(t_data *philo_s);
-void	kill_process(t_data *philo_s);
+int		kill_process(t_data *philo_s);
+
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:34:04 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 18:07:17 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:54:57 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	init_forks(t_data *philo_s)
 	sem_unlink(SEM_WRITE);
 	sem_unlink(SEM_PRINT_DIED);
 	philo_s->s_forks = sem_open(SEM_FORKS, O_CREAT | O_EXCL, 0644, philo_s->philo_num);
-	philo_s->s_state_end = sem_open(SEM_WRITE, O_CREAT | O_EXCL, 0644, 1);
+	philo_s->s_state_end = sem_open(SEM_STATE_END, O_CREAT | O_EXCL, 0644, 1);
 	philo_s->s_write = sem_open(SEM_WRITE, O_CREAT | O_EXCL, 0644, 1);
 	philo_s->s_print_died = sem_open(SEM_PRINT_DIED, O_CREAT | O_EXCL, 0644, 1);
 }

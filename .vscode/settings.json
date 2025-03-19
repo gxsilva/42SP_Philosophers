@@ -13,6 +13,8 @@
         "erros.h": "c",
         "struct.h": "c",
         "system_error": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "signal.h": "c",
+        "stdio.h": "c"
     }
 }

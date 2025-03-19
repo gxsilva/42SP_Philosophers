@@ -6,13 +6,12 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:05 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 17:41:48 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/18 23:33:53 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-int		kill_process(t_data *philo_s);
+#include <signal.h>
 
 int main(int argc, char **argv)
 {
@@ -34,7 +33,7 @@ int	kill_process(t_data *philo_s)
 	while (i < philo_s->philo_num)
 	{
 		if (philo_s->pid[i] > 0)
-			kill(philo_s->pid[i], SIGKILL);
+			kill(philo_s->pid[i], SIGTERM);
 		i++;
 	}
 	return (0);
