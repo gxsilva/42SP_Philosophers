@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 01:47:34 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:38:21 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	eat(t_philo *philo)
 {
 	take_forks(philo);
 	pthread_mutex_lock(&philo->lock);
-	philo->eating = 1;
 	philo->time_to_die = get_time(philo->data) + philo->data->death_time;
+	philo->eating = 1;
 	message(EATING, philo);
 	philo->eat_cont++;
 	ft_usleep(philo->data->eat_time, philo);

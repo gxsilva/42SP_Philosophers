@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 01:39:21 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:30:36 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	message(char *str, t_philo *philo)
 	time = get_time(philo->data) - philo->data->start_time;
 	if (ft_strcmp(str, DIED) == 0 && philo->data->dead == 0)
 	{
-		printf("%lu %d %s\n", time, philo->id + 1, str);
+		printf("%lu %d %s\n", time, philo->id, str);
 		philo->data->dead = 1;
 	}
 	if (!philo->data->dead)
-		printf("%lu %d %s\n", time, philo->id + 1, str);
+		printf("%lu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
 }
 
@@ -61,10 +61,7 @@ void	input_checker(int argc, char **argv)
 			if (argv[x][y] == ' ')
 				(void)argc;
 			else if (argv[x][y] < 48 || argv[x][y] > 57)
-			{
-				printf("%c | %d\n", argv[x][y], argv[x][y]);
 				terminate_with_error(INVALID_FORMAT, -1);
-			}
 			y++;
 		}
 		x++;
