@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:51:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 02:38:21 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:28:33 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 static void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	message(TAKE_FORK, philo);
-	pthread_mutex_lock(philo->l_fork);
-	message(TAKE_FORK, philo);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(philo->r_fork);
+		message(TAKE_FORK, philo);
+		pthread_mutex_lock(philo->l_fork);
+		message(TAKE_FORK, philo);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->l_fork);
+		message(TAKE_FORK, philo);
+		pthread_mutex_lock(philo->r_fork);
+		message(TAKE_FORK, philo);
+	}
 }
 
 static void	drop_forks(t_philo *philo)
@@ -36,7 +46,9 @@ void	eat(t_philo *philo)
 	philo->eating = 1;
 	message(EATING, philo);
 	philo->eat_cont++;
+	pthread_mutex_unlock(&philo->lock);
 	ft_usleep(philo->data->eat_time, philo);
+	pthread_mutex_lock(&philo->lock);
 	philo->eating = 0;
 	pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);

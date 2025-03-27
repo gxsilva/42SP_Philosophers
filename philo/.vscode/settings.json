@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "utils.h": "c"
+        "utils.h": "c",
+        "stdint.h": "c",
+        "erros.h": "c",
+        "pthread.h": "c",
+        "time.h": "c",
+        "stdlib.h": "c"
     }
 }

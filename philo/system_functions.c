@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/10 15:44:34 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:10:17 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,23 @@ void	*monitor(void *args)
 
 void	*supervisor(void *args)
 {
-	t_philo		*philo;
+	t_philo		*ph;
 
-	philo = (t_philo *)args;
-	while (philo->data->dead == 0)
+	ph = (t_philo *)args;
+	while (ph->data->dead == 0)
 	{
-		pthread_mutex_lock(&philo->lock);
-		if (get_time(philo->data) >= philo->time_to_die && philo->eating == 0)
-			message(DIED, philo);
-		else if (philo->eat_cont == philo->data->meals_nb)
+		pthread_mutex_lock(&ph->lock);
+		if (get_time(ph->data) >= (ph->time_to_die + 1) && ph->eating == 0)
+			message(DIED, ph);
+		else if (ph->eat_cont == ph->data->meals_nb)
 		{
-			pthread_mutex_lock(&philo->data->lock);
-			philo->data->finished++;
-			philo->eat_cont++;
-			pthread_mutex_unlock(&philo->data->lock);
+			pthread_mutex_lock(&ph->data->lock);
+			ph->data->finished++;
+			ph->eat_cont++;
+			pthread_mutex_unlock(&ph->data->lock);
 		}
-		pthread_mutex_unlock(&philo->lock);
+		pthread_mutex_unlock(&ph->lock);
+		usleep(100);
 	}
 	return (NULL);
 }
