@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 02:30:36 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/03 02:09:07 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
-void		input_checker(int argc, char **argv);
+int			input_checker(char **argv);
 
 void	message(char *str, t_philo *philo)
 {
@@ -46,7 +46,7 @@ uint64_t	get_time(t_data *philo_s)
 	return (cast_time);
 }
 
-void	input_checker(int argc, char **argv)
+int	input_checker(char **argv)
 {
 	int		x;
 	int		y;
@@ -58,12 +58,11 @@ void	input_checker(int argc, char **argv)
 		y = 0;
 		while (argv[x][y])
 		{
-			if (argv[x][y] == ' ')
-				(void)argc;
-			else if (argv[x][y] < 48 || argv[x][y] > 57)
-				terminate_with_error(INVALID_FORMAT, -1);
+			if (argv[x][y] < 48 || argv[x][y] > 57)
+				return (0);
 			y++;
 		}
 		x++;
 	}
+	return (1);
 }

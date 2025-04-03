@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 16:02:52 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/03 02:07:54 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,15 @@ typedef struct s_data
 int			ft_atoi(char *nbr);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *str1, char *str2);
-void		init_value(char **argv, int argc, t_data *philo_s);
 void		free_philo(t_data *philo_s);
-void		init_value(char **argv, int argc, t_data *philo_s);
+int			init_value(char **argv, int argc, t_data *philo_s, int *cod);
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
 int			ft_usleep(uint64_t time, t_philo *philo);
-void		input_checker(int argc, char **argv);
+int			input_checker(char **argv);
 void		ft_exit(t_data *philo_s);
 void		clear_data(t_data *philo_s);
-void		terminate_with_error(char *str, int exit_cod);
+int			terminate_with_error(char *str, int exit_cod);
 void		*monitor(void *args);
 void		*supervisor(void *args);
 void		*routine(void *args);

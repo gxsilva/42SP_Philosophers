@@ -6,22 +6,22 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/14 17:14:40 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/03 01:39:18 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void		terminate_with_error(char *str, int exit_cod);
+int			terminate_with_error(char *str, int exit_cod);
 void		free_philo(t_data *philo_s);
 void		clear_data(t_data *philo_s);
 void		ft_exit(t_data *philo_s);
 static void	free_node(t_data *philo_s);
 
-void	terminate_with_error(char *str, int exit_cod)
+int	terminate_with_error(char *str, int exit_cod)
 {
 	printf("[Error]: %s\n", str);
-	exit (exit_cod);
+	return (exit_cod);
 }
 
 static void	free_node(t_data *philo_s)

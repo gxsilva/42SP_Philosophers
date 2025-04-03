@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 17:10:17 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/03 02:42:02 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,16 @@ void	*supervisor(void *args)
 void	*routine(void *args)
 {
 	t_philo		*philo;
+	t_data		*p_data;
 
 	philo = (t_philo *)args;
 	philo->time_to_die = philo->data->death_time + get_time(philo->data);
-	if (pthread_create(&philo->t1, NULL, supervisor, (void *)philo) != 0)
+	p_data = philo->data;
+	if (pthread_create(&philo->t1, NULL, supervisor, (void *)philo))
 	{
-		free_philo(philo->data);
+		free_philo(p_data);
 		terminate_with_error(TH_CREATE, -4);
+		return (NULL);
 	}
 	while (philo->data->dead == 0)
 	{
