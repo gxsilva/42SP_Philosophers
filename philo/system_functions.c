@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:58:58 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/03 02:42:02 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:54:28 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,26 @@ void	*supervisor(void *args)
 	t_philo		*ph;
 
 	ph = (t_philo *)args;
-	while (ph->data->dead == 0)
+	while (1)
 	{
-		pthread_mutex_lock(&ph->lock);
+		pthread_mutex_lock(&ph->data->lock);
+		if (ph->data->dead != 0)
+		{
+			pthread_mutex_unlock(&ph->data->lock);
+			break ;
+		}
 		if (get_time(ph->data) >= (ph->time_to_die + 1) && ph->eating == 0)
+		{
+			pthread_mutex_unlock(&ph->data->lock);
 			message(DIED, ph);
+			return (NULL);
+		}
 		else if (ph->eat_cont == ph->data->meals_nb)
 		{
-			pthread_mutex_lock(&ph->data->lock);
 			ph->data->finished++;
 			ph->eat_cont++;
-			pthread_mutex_unlock(&ph->data->lock);
 		}
-		pthread_mutex_unlock(&ph->lock);
+		pthread_mutex_unlock(&ph->data->lock);
 		usleep(100);
 	}
 	return (NULL);

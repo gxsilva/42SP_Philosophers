@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:45:18 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/03 02:09:07 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:49:12 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,27 @@ void	message(char *str, t_philo *philo)
 {
 	uint64_t	time;
 
-	pthread_mutex_lock(&philo->data->write);
 	time = get_time(philo->data) - philo->data->start_time;
+
+	pthread_mutex_lock(&philo->data->lock);
 	if (ft_strcmp(str, DIED) == 0 && philo->data->dead == 0)
 	{
-		printf("%lu %d %s\n", time, philo->id, str);
 		philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->data->lock);
+		pthread_mutex_lock(&philo->data->write);
+		printf("%lu %d %s\n", time, philo->id, str);
+		pthread_mutex_unlock(&philo->data->write);
+		return;
 	}
 	if (!philo->data->dead)
+	{
+		pthread_mutex_unlock(&philo->data->lock);
+		pthread_mutex_lock(&philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
-	pthread_mutex_unlock(&philo->data->write);
+		pthread_mutex_unlock(&philo->data->write);
+		return;
+	}
+	pthread_mutex_unlock(&philo->data->lock);
 }
 
 uint64_t	get_time(t_data *philo_s)

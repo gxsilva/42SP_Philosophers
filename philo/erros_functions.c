@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/03 01:39:18 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/03 03:20:55 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	free_philo(t_data *philo_s)
 		i = -1;
 		while (++i < philo_s->philo_num)
 			pthread_mutex_destroy(&philo_s->forks[i]);
-		if (philo_s->forks != NULL)
-			free(philo_s->forks);
+		free(philo_s->forks);
 		philo_s->forks = NULL;
 	}
 	free_node(philo_s);
