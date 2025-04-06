@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:35 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/03 02:07:54 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/06 17:12:18 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void		*monitor(void *args);
 void		*supervisor(void *args);
 void		*routine(void *args);
 void		eat(t_philo *philo);
+int			is_alive(t_data *data, int mod);
 
 #endif

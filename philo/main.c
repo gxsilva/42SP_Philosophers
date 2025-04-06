@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:26:08 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/03 02:43:30 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:19:42 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,27 @@ static int	_start_philo(t_data *philo_s)
 
 static int	_single_philo(t_data *philo_s)
 {
+	t_philo		*s_ph;
+
 	philo_s->start_time = get_time(philo_s);
-	if (pthread_create(&philo_s->tid[0], NULL, &routine, &philo_s->philos[0]))
-		return (0);
-	pthread_detach(philo_s->tid[0]);
-	while (philo_s->dead == 0)
-		ft_usleep(0, &philo_s->philos[0]);
-	free_philo(philo_s);
+	s_ph = &philo_s->philos[0];
+	s_ph->time_to_die = philo_s->death_time - get_time(philo_s);
+	pthread_mutex_lock(s_ph->l_fork);
+	message(TAKE_FORK, s_ph);
+	pthread_mutex_unlock(s_ph->l_fork);
+	ft_usleep(philo_s->death_time, s_ph);
+	message(DIED, s_ph);
 	return (1);
 }
+
+// static int	_single_philo(t_data *philo_s)
+// {
+// 	philo_s->start_time = get_time(philo_s);
+// 	if (pthread_create(&philo_s->tid[0], NULL, &routine, &philo_s->philos[0]))
+// 		return (0);
+// 	pthread_detach(philo_s->tid[0]);
+// 	while (philo_s->dead == 0)
+// 		ft_usleep(0, &philo_s->philos[0]);
+// 	free_philo(philo_s);
+// 	return (1);
+// }
