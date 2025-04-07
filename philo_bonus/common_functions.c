@@ -6,27 +6,34 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 01:31:16 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/07 01:12:50 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 void	message(char *str, t_philo *philo);
-void	input_checker(int argc, char **argv);
+void	input_checker(char **argv);
 uint64_t	get_time(t_data *philo_s);
 
 void	message(char *str, t_philo *philo)
 {
 	uint64_t	time;
 
-	sem_wait(philo->data->write);
 	time = get_time(philo->data) - philo->data->start_time;
-	if (ft_strcmp(str, DIED) == 0 && get_state(philo->data) != 1)
+	if (ft_strcmp(str, DIED) == 0 && !is_alive(philo->data, 0))
+	{
+		is_alive(philo->data, 1);
+		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
-	if (!get_state(philo->data))
+		sem_post(philo->data->write);
+	}
+	if (!is_alive(philo->data, 0))
+	{
+		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
-	sem_post(philo->data->write);
+		sem_post(philo->data->write);
+	}
 }
 
 uint64_t	get_time(t_data *philo_s)
@@ -43,44 +50,38 @@ uint64_t	get_time(t_data *philo_s)
 	return (cast_time);
 }
 
-void	input_checker(int argc, char **argv)
+void	input_checker(char **argv)
 {
 	int		x;
 	int		y;
 
 	x = 1;
-	y = 1;
-	while (argv[x])
+	while (argv[++x])
 	{
-		y = 0;
-		while (argv[x][y])
+		y = -1;
+		while (argv[x][++y])
 		{
-			if (argv[x][y] == ' ')
-				(void)argc;
-			else if (argv[x][y] < 48 || argv[x][y] > 57)
-			{
-				printf("%c | %d\n", argv[x][y], argv[x][y]);
+			if (argv[x][y] < 48 || argv[x][y] > 57)
 				terminate_with_error(INVALID_FORMAT, -1);
-			}
-			y++;
 		}
-		x++;
 	}
 }
 
-void	update_state(t_data *philo_s, int new_state)
-{
-	sem_wait(philo_s->lock);
-	philo_s->dead = new_state;
-	sem_post(philo_s->lock);
-}
-
-short	get_state(t_data *philo_s)
+int	is_alive(t_data *philo_s, int mod)
 {
 	int	state;
 
 	sem_wait(philo_s->lock);
-	state = philo_s->dead;
-	sem_post(philo_s->lock);
-	return (state);
+	if (mod == 0)
+	{
+		state = philo_s->dead;
+		sem_post(philo_s->lock);
+		return (state);
+	}
+	else
+	{
+		philo_s->dead = 1;
+		sem_post(philo_s->lock);
+	}
+	return (-1);
 }

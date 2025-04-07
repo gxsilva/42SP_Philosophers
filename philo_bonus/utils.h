@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/19 01:31:42 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/07 00:50:15 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 
-void	input_checker(int argc, char **argv);
+void	input_checker(char **argv);
 void	init_value(char **argv, int argc, t_data *philo_s);
 int		start_philo(t_data *philo_s);
 void	eat(t_philo *philo);
@@ -51,10 +51,8 @@ int		ft_usleep(uint64_t time, t_philo *philo);
 
 /*Common functions */
 void	message(char *str, t_philo *philo);
-void	input_checker(int argc, char **argv);
 uint64_t	get_time(t_data *philo_s);
-void	update_state(t_data *philo_s, int new_state);
-short	get_state(t_data *philo_s);
+int		is_alive(t_data *philo_s, int mod);
 
 /* idk functions */
 int		start_routine(t_data *philo_s, int id);

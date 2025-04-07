@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/18 23:40:45 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/07 01:27:27 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ void	*supervisor(void *args)
 	t_philo		*philo;
 
 	philo = (t_philo *)args;
-	while (!get_state(philo->data))
+	while (!is_alive(philo->data, 0))
 	{
-		if (get_time(philo->data) >= philo->time_to_die && philo->eating == 0)
+		sem_wait(philo->data->lock);
+		if (get_time(philo->data) >= (philo->time_to_die + 1))
 		{
-			update_state(philo->data, 1);
+			sem_post(philo->data->lock);
 			message(DIED, philo);
-			break;
+			continue;
 		}
-		usleep(10);
+		sem_post(philo->data->lock);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -56,7 +58,7 @@ int	monitor(t_data *philo_s)
 			i++;
 		}
 		if (philo_s->finished == finished)
-		return (kill_process(philo_s), 1);
+			return (kill_process(philo_s), 1);
 		i = 0;
 		usleep(10);
 	}
@@ -83,7 +85,7 @@ int	take_process(t_data *philo_s)
 		i++;
 		if (i >= philo_s->philo_num)
 			i = 0;
-		// usleep(50);
+		usleep(50);
 	}
 	return (0);
 }
@@ -95,9 +97,11 @@ int	start_philo(t_data *philo_s)
 	i = -1;
 	philo_s->start_time = get_time(philo_s);
 	while (++i < philo_s->philo_num)
+	{
 		start_routine(philo_s, i);
+		usleep(1);
+	}
 	// monitor(philo_s);
-	printf("take process\n");
 	take_process(philo_s);
 	return (0);
 }
@@ -117,7 +121,7 @@ int	start_routine(t_data *philo_s, int id)
 			free_philo(philo->data);
 			terminate_with_error(TH_CREATE, -4);
 		}
-		while (get_state(philo->data) != 1)
+		while (!is_alive(philo->data, 0))
 		{
 			eat(philo);
 			message(THINK, philo);
@@ -125,6 +129,7 @@ int	start_routine(t_data *philo_s, int id)
 		pthread_join(philo->t1, NULL);
 		exit (1);
 	}
-	philo_s->pid[id] = pid;
+	else
+		philo_s->pid[id] = pid;
 	return (0);
 }
