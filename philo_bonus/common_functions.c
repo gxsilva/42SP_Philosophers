@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 01:48:18 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:44:44 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	message(char *str, t_philo *philo)
 	uint64_t	time;
 
 	time = get_time(philo->data) - philo->data->start_time;
-	if (ft_strcmp(str, DIED) == 0 && !is_alive(philo->data, 0))
+	if (ft_strcmp(str, DIED) == 0)
 	{
-		is_alive(philo->data, 1);
 		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
+		return ;
 	}
-	if (!is_alive(philo->data, 0))
+	else
 	{
 		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
@@ -64,23 +64,4 @@ void	input_checker(char **argv)
 				terminate_with_error(INVALID_FORMAT, -1);
 		}
 	}
-}
-
-int	is_alive(t_data *philo_s, int mod)
-{
-	int	state;
-
-	sem_wait(philo_s->lock);
-	if (mod == 0)
-	{
-		state = philo_s->dead;
-		sem_post(philo_s->lock);
-		return (state);
-	}
-	else
-	{
-		philo_s->dead = 1;
-		sem_post(philo_s->lock);
-	}
-	return (-1);
 }

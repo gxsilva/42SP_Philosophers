@@ -6,12 +6,39 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:05 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 02:14:29 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:06:53 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <signal.h>
+
+static int	_single_philo(t_data *philo_s);
+void		kill_process(t_data *philo_s);
+
+int	main(int argc, char **argv)
+{
+	t_data	philo_s;
+	pid_t	tmp_pid;
+
+	if (argc < 5 || argc > 6)
+		terminate_with_error(INPUT_NUMBER, -1);
+	input_checker(argv);
+	init_value(argv, argc, &philo_s);
+	if (philo_s.philo_num == 1)
+	{
+		tmp_pid = _single_philo(&philo_s);
+		wait(&tmp_pid);
+		close_semaphore(&philo_s);
+		free_philo(&philo_s);
+	}
+	else
+	{
+		start_philo(&philo_s);
+		close_semaphore(&philo_s);
+		free_philo(&philo_s);
+	}
+	return (0);
+}
 
 static int	_single_philo(t_data *philo_s)
 {
@@ -30,37 +57,19 @@ static int	_single_philo(t_data *philo_s)
 		message(TAKE_FORK, ph);
 		ft_usleep(ph->data->death_time, ph);
 		message(DIED, ph);
+		sem_close(philo_s->write);
+		sem_close(philo_s->forks);
+		free_philo(philo_s);
 		exit(-1);
 	}
 	return (pid);
 }
 
-int	main(int argc, char **argv)
-{
-	t_data	philo_s;
-	pid_t	tmp_pid;
-
-	if (argc < 5 || argc > 6)
-		terminate_with_error(INPUT_NUMBER, -1);
-	input_checker(argv);
-	init_value(argv, argc, &philo_s);
-	if (philo_s.philo_num == 1)
-	{
-		tmp_pid = _single_philo(&philo_s);
-		wait(&tmp_pid);
-	}
-	else
-		start_philo(&philo_s);
-	return (0);
-}
-
-int	kill_process(t_data *philo_s)
+void	kill_process(t_data *philo_s)
 {
 	int	i;
 
 	i = -1;
 	while (++i < philo_s->philo_num)
-		if (philo_s->pid[i] > 0)
-			kill(philo_s->pid[i], SIGKILL);
-	return (0);
+		kill(philo_s->pid[i], SIGKILL);
 }

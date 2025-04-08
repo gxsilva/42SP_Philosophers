@@ -6,7 +6,7 @@
 #    By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 14:47:36 by lsilva-x          #+#    #+#              #
-#    Updated: 2025/03/17 18:41:58 by lsilva-x         ###   ########.fr        #
+#    Updated: 2025/04/08 15:23:22 by lsilva-x         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC		=	main.c \
 			init_value.c \
 			actions.c \
 			erros_functions.c \
-			system_functions.c
+			system_functions.c \
+			utils_bonus.c
 
 OBJ		= $(SRC:.c=.o)
 
