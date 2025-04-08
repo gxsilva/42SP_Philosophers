@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 01:33:59 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:23:11 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <sys/wait.h>
 # include <semaphore.h>
+# include <signal.h>
 # include <stdint.h>
 # include <fcntl.h>
 # include "erros.h"
@@ -61,5 +62,6 @@ int			monitor(t_data *philo_s);
 int			take_process(t_data *philo_s);
 int			start_philo(t_data *philo_s);
 int			kill_process(t_data *philo_s);
+void		close_semaphore(t_data *philo_s);
 
 #endif

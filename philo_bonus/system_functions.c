@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 03:09:30 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:40:31 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	*supervisor(void *args)
 			message(DIED, philo);
 			continue ;
 		}
-		if (philo->eat_cont <= 0)
-			exit(2);
+		// if (philo->eat_cont <= 0)
+		// 	exit(2);
 		sem_post(philo->data->lock);
 		usleep(5);
 	}

@@ -6,12 +6,11 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:05 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 02:14:29 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:18:45 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <signal.h>
 
 static int	_single_philo(t_data *philo_s)
 {
@@ -30,6 +29,7 @@ static int	_single_philo(t_data *philo_s)
 		message(TAKE_FORK, ph);
 		ft_usleep(ph->data->death_time, ph);
 		message(DIED, ph);
+		free_philo(philo_s);
 		exit(-1);
 	}
 	return (pid);
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	{
 		tmp_pid = _single_philo(&philo_s);
 		wait(&tmp_pid);
+		free_philo(&philo_s);
 	}
 	else
 		start_philo(&philo_s);

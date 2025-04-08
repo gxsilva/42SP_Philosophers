@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/03/17 20:46:05 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:23:48 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,29 @@ void	terminate_with_error(char *str, int exit_cod)
 
 static void	free_node(t_data *philo_s)
 {
+	int		i;
+
+	i = -1;
 	if (philo_s->philos != NULL)
 	{
-		free(philo_s->philos);
+		while (++i < philo_s->philo_num)
+			free(&philo_s->philos[i]);
 		philo_s->philos = NULL;
 	}
+	i = -1;
 	if (philo_s->pid != NULL)
 	{
-		free(philo_s->pid);
+		while (++i < philo_s->philo_num)
+			free(&philo_s->pid[i]);
 		philo_s->pid = NULL;
 	}
-	free(philo_s);
 }
 
 void	free_philo(t_data *philo_s)
 {
-	int		i;
-
 	if (philo_s == NULL)
 		return ;
-	sem_destroy(philo_s->write);
-	if (philo_s->forks != NULL)
-	{
-		i = -1;
-		while (++i < philo_s->philo_num)
-			sem_destroy(&philo_s->forks[i]);
-		free(philo_s->forks);
-		philo_s->forks = NULL;
-	}
+	close_semaphore(philo_s);
 	free_node(philo_s);
 }
 

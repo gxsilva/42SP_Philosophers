@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:43:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 02:14:21 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:20:59 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define SEM_FORKS "forks"
 # define SEM_LOCK "lock"
 # define SEM_WRITE "write"
-# define SEM_PH_LOCK "ph_lock"
 
 # include "utils.h"
 
@@ -49,7 +48,6 @@ typedef struct s_data
 	uint64_t		start_time;
 	sem_t			*forks;
 	sem_t			*lock;
-	sem_t			*ph_lock;
 	sem_t			*write;
 }	t_data;
 
