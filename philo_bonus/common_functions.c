@@ -6,14 +6,14 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/07 01:12:50 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:48:18 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	message(char *str, t_philo *philo);
-void	input_checker(char **argv);
+void		message(char *str, t_philo *philo);
+void		input_checker(char **argv);
 uint64_t	get_time(t_data *philo_s);
 
 void	message(char *str, t_philo *philo)
@@ -26,7 +26,6 @@ void	message(char *str, t_philo *philo)
 		is_alive(philo->data, 1);
 		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
-		sem_post(philo->data->write);
 	}
 	if (!is_alive(philo->data, 0))
 	{

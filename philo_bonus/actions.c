@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:58:48 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/07 01:15:37 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 02:35:25 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	eat(t_philo *philo)
 		sem_post(philo->data->lock);
 		message(EATING, philo);
 		sem_wait(philo->data->lock);
-		philo->eat_cont++;
+		philo->eat_cont--;
 		sem_post(philo->data->lock);
 		ft_usleep(philo->data->eat_time, philo);
 		drop_forks(philo);
