@@ -37,6 +37,9 @@
 *.x86_64
 *.hex
 
+# Vscode
+.vscode
+
 # Debug files
 *.dSYM/
 *.su
