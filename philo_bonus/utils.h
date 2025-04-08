@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 15:23:11 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:26:01 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int			is_alive(t_data *philo_s, int mod);
 
 /* idk functions */
 int			start_routine(t_data *philo_s, int id);
-void		*supervisor(void *args);
-int			monitor(t_data *philo_s);
-int			take_process(t_data *philo_s);
+// void		*supervisor(void *args);
+// int			monitor(t_data *philo_s);
+void		take_process(t_data *philo_s);
 int			start_philo(t_data *philo_s);
-int			kill_process(t_data *philo_s);
+void		kill_process(t_data *philo_s);
 void		close_semaphore(t_data *philo_s);
 
 #endif

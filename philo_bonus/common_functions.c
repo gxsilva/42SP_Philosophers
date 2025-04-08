@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 01:48:18 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:57:35 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	message(char *str, t_philo *philo)
 	uint64_t	time;
 
 	time = get_time(philo->data) - philo->data->start_time;
-	if (ft_strcmp(str, DIED) == 0 && !is_alive(philo->data, 0))
+	if (ft_strcmp(str, DIED) == 0)
 	{
-		is_alive(philo->data, 1);
 		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
+		return ;
 	}
-	if (!is_alive(philo->data, 0))
+	else
 	{
 		sem_wait(philo->data->write);
 		printf("%lu %d %s\n", time, philo->id, str);
