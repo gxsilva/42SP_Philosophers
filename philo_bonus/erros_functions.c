@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 21:04:23 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 15:23:48 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:46:53 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static void	free_node(t_data *philo_s)
 	i = -1;
 	if (philo_s->philos != NULL)
 	{
-		while (++i < philo_s->philo_num)
-			free(&philo_s->philos[i]);
+		free(philo_s->philos);
 		philo_s->philos = NULL;
 	}
-	i = -1;
 	if (philo_s->pid != NULL)
 	{
-		while (++i < philo_s->philo_num)
-			free(&philo_s->pid[i]);
+		free(philo_s->pid);
 		philo_s->pid = NULL;
 	}
 }
@@ -48,7 +45,6 @@ void	free_philo(t_data *philo_s)
 {
 	if (philo_s == NULL)
 		return ;
-	close_semaphore(philo_s);
 	free_node(philo_s);
 }
 
@@ -70,6 +66,5 @@ void	ft_exit(t_data *philo_s)
 	while (++i < philo_s->philo_num)
 		sem_destroy(&philo_s->forks[i]);
 	sem_destroy(philo_s->write);
-	sem_destroy(philo_s->lock);
 	clear_data(philo_s);
 }

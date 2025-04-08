@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 17:26:01 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:44:34 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			ft_usleep(uint64_t time, t_philo *philo);
 /*Common functions */
 void		message(char *str, t_philo *philo);
 uint64_t	get_time(t_data *philo_s);
-int			is_alive(t_data *philo_s, int mod);
 
 /* idk functions */
 int			start_routine(t_data *philo_s, int id);

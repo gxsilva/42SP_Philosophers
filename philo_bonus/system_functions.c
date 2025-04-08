@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 18:14:11 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 17:53:13 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:13:38 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,16 @@ int	start_routine(t_data *philo_s, int id)
 	{
 		philo = &philo_s->philos[id];
 		philo->time_to_die = philo->data->death_time + get_time(philo->data);
+		if (philo->id % 2 == 0)
+			usleep(500);
 		while (philo->eat_cont != 0)
 		{
 			eat(philo);
 			message(THINK, philo);
 		}
-		pthread_join(philo->t1, NULL);
+		sem_close(philo->data->write);
+		sem_close(philo->data->forks);
+		free_philo(philo->data);
 		exit (1);
 	}
 	else
@@ -68,4 +72,3 @@ void	take_process(t_data *philo_s)
 				return (kill_process(philo_s));
 	}
 }
-

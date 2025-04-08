@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:43:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 15:20:59 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:44:10 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_data
 	uint64_t		sleep_time;
 	uint64_t		start_time;
 	sem_t			*forks;
-	sem_t			*lock;
 	sem_t			*write;
 }	t_data;
 
