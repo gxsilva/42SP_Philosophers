@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:05 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 19:06:53 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:04:51 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (philo_s.philo_num == 1)
 	{
 		tmp_pid = _single_philo(&philo_s);
-		wait(&tmp_pid);
+		waitpid(-1, &tmp_pid, 0);
 		close_semaphore(&philo_s);
 		free_philo(&philo_s);
 	}
