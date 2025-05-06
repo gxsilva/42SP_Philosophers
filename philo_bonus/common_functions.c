@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:48:03 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 18:44:44 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:59:30 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	input_checker(char **argv)
 	int		x;
 	int		y;
 
-	x = 1;
+	x = 0;
 	while (argv[++x])
 	{
 		y = -1;
