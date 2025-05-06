@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   erros.h                                            :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:12:02 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 01:20:54 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:20:24 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROS_H
-# define ERROS_H
+#ifndef ERROR_H
+# define ERROR_H
 
 /*Input Error* | COD -1 */
 # define PHI_OUT_RANGE "Philosopher count out of range (1-200)"

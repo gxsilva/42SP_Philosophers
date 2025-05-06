@@ -19,7 +19,7 @@ SRC		=	main.c \
 			libft_functions.c \
 			init_value.c \
 			actions.c \
-			erros_functions.c \
+			error_functions.c \
 			system_functions.c \
 			utils_bonus.c
 

@@ -6,7 +6,7 @@
 /*   By: lsilva-x <lsilva-x@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:42:45 by lsilva-x          #+#    #+#             */
-/*   Updated: 2025/04/08 18:44:34 by lsilva-x         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:20:10 by lsilva-x         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <signal.h>
 # include <stdint.h>
 # include <fcntl.h>
-# include "erros.h"
+# include "error.h"
 # include "struct.h"
 
 # define DIED "died"

@@ -26,9 +26,6 @@ void	terminate_with_error(char *str, int exit_cod)
 
 static void	free_node(t_data *philo_s)
 {
-	int		i;
-
-	i = -1;
 	if (philo_s->philos != NULL)
 	{
 		free(philo_s->philos);
